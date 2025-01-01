@@ -1,5 +1,6 @@
 {
-    "switchLanguage": "Switch to Arabic",
-    "home": "Home",
-    "about": "About"
-  }
+  "home": "Home",
+  "about": "About",
+  "item": "Item",
+  "darkMode": "Dark Mode"
+}

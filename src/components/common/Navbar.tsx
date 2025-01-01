@@ -22,7 +22,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-blue-500 p-4">
+    <nav className="bg-blue-500 dark:bg-gray-800 p-4">
       <div className="container mx-auto flex justify-between items-center">
         {/* Logo and Hamburger Menu */}
         <div className="flex items-center space-x-4">
@@ -58,12 +58,18 @@ const Navbar = () => {
           } space-x-4`}
         >
           <li>
-            <Link to="/" className="text-white hover:text-gray-200">
+            <Link
+              to="/"
+              className="text-white hover:text-gray-200 dark:hover:text-gray-400"
+            >
               {t("home")}
             </Link>
           </li>
           <li>
-            <Link to="/about" className="text-white hover:text-gray-200">
+            <Link
+              to="/about"
+              className="text-white hover:text-gray-200 dark:hover:text-gray-400"
+            >
               {t("about")}
             </Link>
           </li>

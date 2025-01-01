@@ -1,5 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
+import { useDarkMode } from "../../contexts/DarkModeContext"; // Import the hook
 
 interface SideMenuProps {
   isOpen: boolean;
@@ -9,6 +10,7 @@ interface SideMenuProps {
 
 const SideMenu = ({ isOpen, onClose, toggleLanguage }: SideMenuProps) => {
   const { t, i18n } = useTranslation("common");
+  const { isDarkMode, toggleDarkMode } = useDarkMode(); // Use the dark mode context
 
   return (
     <div
@@ -79,6 +81,38 @@ const SideMenu = ({ isOpen, onClose, toggleLanguage }: SideMenuProps) => {
               ></path>
             </svg>
           </button>
+        </div>
+
+        {/* Dark Mode Toggle */}
+        <div className="p-4 border-b border-gray-200 dark:border-gray-700">
+          <label className="flex items-center cursor-pointer justify-between">
+            {/* Toggle Label */}
+            <div className="text-gray-700 dark:text-white">{t("darkMode")}</div>
+
+            {/* Toggle Switch */}
+            <div className="relative">
+              {/* Toggle Input */}
+              <input
+                type="checkbox"
+                className="sr-only"
+                checked={isDarkMode}
+                onChange={toggleDarkMode}
+              />
+              {/* Toggle Track */}
+              <div
+                className={`w-10 h-6 rounded-full shadow-inner transition-colors ${
+                  isDarkMode ? "bg-blue-600" : "bg-gray-300"
+                }`}
+              ></div>
+              {/* Toggle Thumb */}
+              <div
+                className={`absolute w-6 h-6 bg-white rounded-full shadow-md transform transition-transform ${
+                  isDarkMode ? "translate-x-4" : "translate-x-0"
+                }`}
+                style={{ top: "0", left: "-2px" }}
+              ></div>
+            </div>
+          </label>
         </div>
 
         {/* Scrollable Menu Items */}

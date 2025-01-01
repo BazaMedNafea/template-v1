@@ -4,9 +4,9 @@ export default {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
-  darkMode: "media", // Enable dark mode based on system preferences
+  darkMode: "class", // Enable class-based dark mode
   theme: {
     extend: {},
   },
   plugins: [],
-}
+};
