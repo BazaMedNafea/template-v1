@@ -1,16 +1,16 @@
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-import { useDarkMode } from "../../contexts/DarkModeContext"; // Import the hook
+import { useDarkMode } from "../../contexts/DarkModeContext";
+import LanguageSwitcher from "./LanguageSwitcher"; // Import the LanguageSwitcher
 
 interface SideMenuProps {
   isOpen: boolean;
   onClose: () => void;
-  toggleLanguage: () => void;
 }
 
-const SideMenu = ({ isOpen, onClose, toggleLanguage }: SideMenuProps) => {
+const SideMenu = ({ isOpen, onClose }: SideMenuProps) => {
   const { t, i18n } = useTranslation("common");
-  const { isDarkMode, toggleDarkMode } = useDarkMode(); // Use the dark mode context
+  const { isDarkMode, toggleDarkMode } = useDarkMode();
 
   return (
     <div
@@ -33,33 +33,8 @@ const SideMenu = ({ isOpen, onClose, toggleLanguage }: SideMenuProps) => {
       >
         {/* Language Switcher and Close Button */}
         <div className="p-4 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center">
-          {/* Language Switcher (AR | EN) */}
-          <div
-            className={`flex ${
-              i18n.language === "ar" ? "space-x-reverse" : ""
-            } space-x-2`}
-          >
-            <button
-              onClick={toggleLanguage}
-              className={`px-2 py-1 rounded ${
-                i18n.language === "en"
-                  ? "bg-blue-500 text-white"
-                  : "bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-white"
-              }`}
-            >
-              EN
-            </button>
-            <button
-              onClick={toggleLanguage}
-              className={`px-2 py-1 rounded ${
-                i18n.language === "ar"
-                  ? "bg-blue-500 text-white"
-                  : "bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-white"
-              }`}
-            >
-              AR
-            </button>
-          </div>
+          {/* Language Switcher */}
+          <LanguageSwitcher />
 
           {/* Close Button */}
           <button
@@ -137,17 +112,6 @@ const SideMenu = ({ isOpen, onClose, toggleLanguage }: SideMenuProps) => {
               </Link>
             </li>
             {/* Add more menu items here */}
-            {Array.from({ length: 20 }).map((_, index) => (
-              <li key={index}>
-                <Link
-                  to={`/item-${index}`}
-                  className="block p-2 text-gray-700 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
-                  onClick={onClose}
-                >
-                  {t("item")} {index + 1}
-                </Link>
-              </li>
-            ))}
           </ul>
         </div>
       </div>

@@ -7,6 +7,9 @@ import arCommon from "./locales/ar/common.json";
 import arHomepage from "./locales/ar/homepage.json";
 import arFooter from "./locales/ar/footer.json";
 
+// Retrieve the language from localStorage, default to 'en' if not found
+const savedLanguage = localStorage.getItem("language") || "en";
+
 i18n.use(initReactI18next).init({
   resources: {
     en: {
@@ -20,7 +23,7 @@ i18n.use(initReactI18next).init({
       footer: arFooter,
     },
   },
-  lng: "en", // Default language
+  lng: savedLanguage, // Use the saved language
   fallbackLng: "en", // Fallback language
   ns: ["common", "homepage", "footer"], // Namespaces
   defaultNS: "common", // Default namespace

@@ -1,17 +1,11 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-import SideMenu from "./SideMenu"; // Import the SideMenu component
+import SideMenu from "./SideMenu";
 
 const Navbar = () => {
   const { t, i18n } = useTranslation("common");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  const toggleLanguage = () => {
-    const newLanguage = i18n.language === "en" ? "ar" : "en";
-    i18n.changeLanguage(newLanguage);
-    document.documentElement.dir = newLanguage === "ar" ? "rtl" : "ltr"; // Set text direction
-  };
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -25,7 +19,7 @@ const Navbar = () => {
     <nav className="bg-blue-500 dark:bg-gray-800 p-4">
       <div className="container mx-auto flex justify-between items-center">
         {/* Logo and Hamburger Menu */}
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center">
           {/* Hamburger Menu (Mobile) */}
           <button
             onClick={toggleMenu}
@@ -47,8 +41,15 @@ const Navbar = () => {
             </svg>
           </button>
 
-          {/* Logo or Brand Name */}
-          <div className="text-white text-xl font-bold">My App</div>
+          {/* Add conditional spacing based on language */}
+          <div
+            className={
+              i18n.language === "ar" ? "mr-4" : "ml-4" // Use mr-4 for Arabic, ml-4 for English
+            }
+          >
+            {/* Logo or Brand Name */}
+            <div className="text-white text-xl font-bold">My App</div>
+          </div>
         </div>
 
         {/* Navigation Links (Desktop) */}
@@ -77,11 +78,7 @@ const Navbar = () => {
       </div>
 
       {/* Side Menu (Mobile) */}
-      <SideMenu
-        isOpen={isMenuOpen}
-        onClose={closeMenu}
-        toggleLanguage={toggleLanguage}
-      />
+      <SideMenu isOpen={isMenuOpen} onClose={closeMenu} />
     </nav>
   );
 };

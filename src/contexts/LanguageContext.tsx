@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import { createContext, useState } from "react";
 
 interface LanguageContextType {
   language: string;
@@ -15,7 +15,10 @@ export const LanguageProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const [language, setLanguage] = useState("en");
+  const [language, setLanguage] = useState(() => {
+    const savedLanguage = localStorage.getItem("language");
+    return savedLanguage || "en";
+  });
 
   return (
     <LanguageContext.Provider value={{ language, setLanguage }}>
